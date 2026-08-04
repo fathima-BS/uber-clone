@@ -4,6 +4,7 @@ const express=require('express');
 const cors=require('cors')
 const connectDB=require('./db/db')
 const app=express();
+const cookieParser=require('cookie-parser');
 const userRoutes=require('./routes/user.routes')
 connectDB();
 app.use(cors());
