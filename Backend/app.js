@@ -12,6 +12,7 @@ app.get('/',(req,res)=>{
     res.send('hello world');
 })
 app.use(express.urlencoded({extended:true}))
+app.use(cookieParser());
 app.use(express.json())
 app.use('/users',userRoutes);
 module.exports=app;
