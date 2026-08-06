@@ -119,3 +119,72 @@ Status Code: `401 Unauthorized`
   "message": "Invalid email or password"
 }
 ```
+
+---
+
+## GET /users/profile
+
+### Description
+
+Returns the authenticated user's profile information.
+
+### Authentication
+
+A valid JWT token is required. It can be sent either as a cookie named `token` or in the `Authorization` header as a Bearer token.
+
+### Success Response
+
+Status Code: `200 OK`
+
+```json
+{
+  "_id": "user_id",
+  "fullname": {
+    "firstname": "Fathima",
+    "lastname": "Sulaiman"
+  },
+  "email": "fathima@example.com"
+}
+```
+
+### Error Response
+
+Status Code: `401 Unauthorized`
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+---
+
+## GET /users/logout
+
+### Description
+
+Logs out the authenticated user by blacklisting the current token and clearing the auth cookie.
+
+### Authentication
+
+A valid JWT token is required. It can be sent either as a cookie named `token` or in the `Authorization` header as a Bearer token.
+
+### Success Response
+
+Status Code: `200 OK`
+
+```json
+{
+  "message": "logged out"
+}
+```
+
+### Error Response
+
+Status Code: `401 Unauthorized`
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
