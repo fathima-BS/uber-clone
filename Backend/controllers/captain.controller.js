@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const captainModel=require('../model/captain.model');
 const captainService=require('../services/captain.service');
-
+const blackListTokenModel=require('../model/blacklistToken.model');
 module.exports.registerCaptain = async (req, res) => {
     try {
         const errors = validationResult(req);
@@ -48,7 +48,7 @@ module.exports.registerCaptain = async (req, res) => {
 };
 module.exports.loginCaptain=async (req,res) => {
     const errors=validationResult(req);
-    if(!error.isEmpty()){
+    if(!errors.isEmpty()){
         return res.status(400).json({ errors: errors.array() });
     }
     const {email,password}= req.body;

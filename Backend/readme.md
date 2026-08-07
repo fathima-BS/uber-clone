@@ -272,3 +272,150 @@ Status Code: `400 Bad Request`
   "message": "Captain already exists"
 }
 ```
+
+---
+
+## POST /captains/login
+
+### Description
+
+Authenticates a captain using email and password and returns a JWT token.
+
+### Request Body
+
+```json
+{
+  "email": "captain@example.com",
+  "password": "123456"
+}
+```
+
+### Validation Rules
+
+* `email` is required and must be a valid email address.
+* `password` is required and must contain at least 6 characters.
+
+### Success Response
+
+Status Code: `200 OK`
+
+```json
+{
+  "token": "jwt_token",
+  "captain": {
+    "_id": "captain_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "captain@example.com",
+    "vehicle": {
+      "color": "Black",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    },
+    "status": "inactive"
+  }
+}
+```
+
+### Error Response
+
+Status Code: `400 Bad Request`
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid Email"
+    }
+  ]
+}
+```
+
+Status Code: `401 Unauthorized`
+
+```json
+{
+  "message": "Invalid email or password"
+}
+```
+
+---
+
+## GET /captains/profile
+
+### Description
+
+Returns the authenticated captain's profile information.
+
+### Authentication
+
+A valid JWT token is required. It can be sent either as a cookie named `token` or in the `Authorization` header as a Bearer token.
+
+### Success Response
+
+Status Code: `200 OK`
+
+```json
+{
+  "captain": {
+    "_id": "captain_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "captain@example.com",
+    "vehicle": {
+      "color": "Black",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    },
+    "status": "inactive"
+  }
+}
+```
+
+### Error Response
+
+Status Code: `401 Unauthorized`
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
+
+---
+
+## GET /captains/logout
+
+### Description
+
+Logs out the authenticated captain by blacklisting the current token and clearing the auth cookie.
+
+### Authentication
+
+A valid JWT token is required. It can be sent either as a cookie named `token` or in the `Authorization` header as a Bearer token.
+
+### Success Response
+
+Status Code: `200 OK`
+
+```json
+{
+  "message": "Logout successfully"
+}
+```
+
+### Error Response
+
+Status Code: `401 Unauthorized`
+
+```json
+{
+  "message": "Unauthorized"
+}
+```
