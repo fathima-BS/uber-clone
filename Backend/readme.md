@@ -188,3 +188,87 @@ Status Code: `401 Unauthorized`
   "message": "Unauthorized"
 }
 ```
+
+---
+
+## POST /captains/register
+
+### Description
+
+Registers a new captain and returns a JWT token.
+
+### Request Body
+
+```json
+{
+  "fullname": {
+    "firstname": "John",
+    "lastname": "Doe"
+  },
+  "email": "captain@example.com",
+  "password": "123456",
+  "vehicle": {
+    "color": "Black",
+    "plate": "ABC123",
+    "capacity": 4,
+    "vehicleType": "car"
+  }
+}
+```
+
+### Validation Rules
+
+* `fullname.firstname` is required and must contain at least 3 characters.
+* `email` is required and must be a valid email address.
+* `password` is required and must contain at least 6 characters.
+* `vehicle.color` is required and must contain at least 3 characters.
+* `vehicle.plate` is required and must contain at least 3 characters.
+* `vehicle.capacity` is required and must be an integer greater than or equal to 1.
+* `vehicle.vehicleType` is required and must be one of `car`, `motorcycle`, or `auto`.
+
+### Success Response
+
+Status Code: `201 Created`
+
+```json
+{
+  "token": "jwt_token",
+  "captain": {
+    "_id": "captain_id",
+    "fullname": {
+      "firstname": "John",
+      "lastname": "Doe"
+    },
+    "email": "captain@example.com",
+    "vehicle": {
+      "color": "Black",
+      "plate": "ABC123",
+      "capacity": 4,
+      "vehicleType": "car"
+    },
+    "status": "inactive"
+  }
+}
+```
+
+### Error Response
+
+Status Code: `400 Bad Request`
+
+```json
+{
+  "errors": [
+    {
+      "msg": "Invalid email"
+    }
+  ]
+}
+```
+
+Status Code: `400 Bad Request`
+
+```json
+{
+  "message": "Captain already exists"
+}
+```
