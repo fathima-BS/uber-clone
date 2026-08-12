@@ -15,7 +15,7 @@ function UserLogin() {
     setPassword('');
   }
   return (
-    <div className='p-7 h-screen flex flex-col justify-between' >
+    <div className='p-5 h-screen flex flex-col justify-between' >
       <div>
         <img className='w-15 mb-20 block' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
         <form onSubmit={(e)=>{
