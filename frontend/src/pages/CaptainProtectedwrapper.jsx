@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Navigate } from 'react-router-dom';
 import { CaptainDataContext } from '../context/CaptainContext';
+import axios from 'axios'
 
 function CaptainProtectedwrapper({ children }) {
   const token = localStorage.getItem('token');
